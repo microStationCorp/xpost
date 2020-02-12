@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}New Post{% endblock title %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="card col-8 mx-auto my-lg-5" style="box-shadow: 1px 1px 1px black;">
+    <div class="card-body">
+        <div class="card-text text-center mb-4">
+            <h3>
+                New Post
+            </h3>
+        </div>
+        <form action="../newpost/" method="post">
+            {% csrf_token %}
+            {% crispy form %}
+        </form>
+    </div>
+</div>
+{% endblock content %}

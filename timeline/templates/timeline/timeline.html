@@ -3,21 +3,22 @@
 {% block title %}timeline{% endblock title %}
 
 {% block content %}
-    {% for post in posts %}
-    <div class="card col-10 mx-auto my-2"
-        style="box-shadow: 1px 1px 1px rgba(13, 54, 54, 0.507);background-color: #0a7a865e;">
-        <div class="card-text">
-            <small class="text-danger">{{post.author|capfirst}}</small>
-        </div>
-        <div class="card-text">
-            {{post.title|capfirst}},
-            <small class="text-muted">
-                {{post.dateOfPost|date:"F d, Y - H : i A"}}
-            </small>
-        </div>
-        <div class="card pl-2 py-2 my-2" style="box-shadow: 1px 1px 1px rgba(13, 54, 54, 0.507);">
-            {{post.post}}
-        </div>
+{% for post in posts %}
+<div class="card col-10 mx-auto my-2"
+    style="box-shadow: 1px 1px 1px rgba(13, 54, 54, 0.507);background-color: #0a7a865e;">
+    <div class="card-text">
+        <small class="text-danger">{{post.author|capfirst}}</small>
+        <small class="text-muted author-{{post.author_id}}">Follow</small>
     </div>
-    {% endfor %}
+    <div class="card-text">
+        {{post.title|capfirst}},
+        <small class="text-muted">
+            {{post.dateOfPost|date:"F d, Y - H : i A"}}
+        </small>
+    </div>
+    <div class="card pl-2 py-2 my-2" style="box-shadow: 1px 1px 1px rgba(13, 54, 54, 0.507);">
+        {{post.post}}
+    </div>
+</div>
+{% endfor %}
 {% endblock content %}

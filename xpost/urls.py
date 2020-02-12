@@ -26,5 +26,6 @@ urlpatterns = [
     path('profile/', include('userprofile.urls')),
     path('logout/', include('logout.urls')),
     path('newpost/', include('newPost.urls')),
-    path('global/', include('global.urls'))
+    path('global/', include('global.urls')),
+    path('follow/', include('following.urls')),
 ]

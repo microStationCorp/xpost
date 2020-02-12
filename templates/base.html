@@ -89,6 +89,20 @@
             }
         }
     </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('small.text-muted').click(function () {
+                var targetClass = $(this)[0].classList[1]
+                var id = targetClass.substr(('author-').length, targetClass.length)
+                console.log(targetClass, $('.' + targetClass), id)
+                if ($('.' + targetClass)[0].innerText == "Follow") {
+                    $('.' + targetClass).text('Following')
+                } else {
+                    $('.' + targetClass).text('Follow')
+                }
+            })
+        })
+    </script>
 </body>
 
 </html>

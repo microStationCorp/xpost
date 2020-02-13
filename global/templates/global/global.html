@@ -38,9 +38,8 @@
         })
 
         function ajaxCall(id, indicator) {
-            console.log(id, indicator)
             $.ajax({
-                // url: '../following/follow',
+                url: '../following/follow',
                 type: 'GET',
                 data: {
                     'id': id,
@@ -52,7 +51,7 @@
                     $("[data-id='" + id + "']").text(data.text)
                 },
                 error: function (error) {
-                    console.log('error', error)
+                    alert('error')
                 }
             })
         }

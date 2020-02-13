@@ -8,7 +8,6 @@ from timeline.models import Follower
 @login_required(login_url='../login')
 def timeline(response):
     myFollowing = Follower.objects.filter(follower_id=response.user.id)
-    print(myFollowing)
     ids = []
     for f in myFollowing:
         ids.append(f.following_id)

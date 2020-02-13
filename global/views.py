@@ -16,8 +16,8 @@ def globalPost(response):
             if f.following_id == post.author_id:
                 posts.append({
                     'post': post,
-                    'indication': 'follow',
-                    'color': 'text-primary'
+                    'indication': 'unfollow',
+                    'color': 'text-success'
                 })
                 flag = True
                 break
@@ -30,8 +30,8 @@ def globalPost(response):
         elif flag == False:
             posts.append({
                 'post': post,
-                'indication': 'unfollow',
-                'color': 'text-success'
+                'indication': 'follow',
+                'color': 'text-primary'
             })
         else:
             flag = False

@@ -5,6 +5,10 @@ from django.http import JsonResponse
 # Create your views here.
 
 
+def followPage(response):
+    return render(response, 'following/follow.html')
+
+
 def following(response):
     if response.method == "GET" and response.is_ajax():
         followingId = response.GET['id']

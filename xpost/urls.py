@@ -28,4 +28,5 @@ urlpatterns = [
     path('newpost/', include('newPost.urls')),
     path('global/', include('global.urls')),
     path('following/', include('following.urls')),
+    path('stat/', include('xpstat.urls'))
 ]

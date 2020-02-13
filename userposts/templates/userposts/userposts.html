@@ -19,5 +19,12 @@
         {{post.post}}
     </div>
 </div>
+{% empty %}
+<div class="card col-10 mx-auto my-2"
+    style="box-shadow: 1px 1px 1px rgba(13, 54, 54, 0.507);background-color: #0a7a865e;">
+    <div class="card-text text-center">
+        Nothing to show
+    </div>
+</div>
 {% endfor %}
 {% endblock content %}

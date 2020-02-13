@@ -8,8 +8,9 @@ from timeline.models import Follower
 @login_required(login_url='../login')
 def timeline(response):
     myFollowing = Follower.objects.filter(follower_id=response.user.id)
+    print(myFollowing)
     ids = []
     for f in myFollowing:
-        ids.append(f.id)
+        ids.append(f.following_id)
     allPosts = Posts.objects.filter(author_id__in=ids).order_by('-dateOfPost')
     return render(response, 'timeline/timeline.html', {'posts': allPosts})

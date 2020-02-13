@@ -7,10 +7,10 @@ from timeline.models import Follower
 def following(response):
     if response.method == "GET" and response.is_ajax():
         followingId = response.GET['id']
-        if response.GET['indicator'] == 'Follow':
+        if response.GET['indicator'] == 'follow':
             Follower.objects.Create(
                 follower_id=response.user.id, following_id=followingId)
-        elif response.GET['indicator'] == 'Following':
+        elif response.GET['indicator'] == 'unfollow':
             Follower.objects.filter(follower_id=response.user.id,
                                     following_id=followingId)[0].delete()
         return HttpResponse('')

@@ -2,8 +2,106 @@
 
 {% block title %}Follow{% endblock title%}
 
+{% block followcss %}
+
+<style>
+    .sideBg {
+        background-color: rgb(4, 50, 102);
+    }
+
+    a.side-username-anchor {
+        text-decoration: none;
+        color: aliceblue;
+    }
+
+    ul.side-username {
+        margin: 4px 0px;
+    }
+
+    ul.side-username:hover {
+        background-color: rgb(55, 134, 224);
+    }
+
+    ul.side-username {
+        list-style-type: none;
+    }
+
+    li {
+        cursor: pointer;
+    }
+</style>
+
+{% endblock followcss %}
+
 {% block content %}
+<div class="myContent row justify-content-center">
 
-follow page
+    <div class="col-lg-2 col-md-10 col-10 col-sm-10 sideBg text-light">
+        {% for follow in myFollow %}
+        {% for usr in follow.usr %}
+        <ul class="m-2 side-username">
+            <li>
+                <a class="side-username-anchor" href="#" data-id="{{usr.username}}">{{usr.username|capfirst}}</a>
+            </li>
+        </ul>
+        {% endfor %}
+        {% endfor %}
+    </div>
 
+    <div class="col-lg-8 col-md-10 col-10 col-sm-10 mybrdr" data-id="myfollowpost">
+        {% for post in posts %}
+        <div class="card mx-auto my-2 p-2"
+            style="box-shadow: 1px 1px 1px rgba(13, 54, 54, 0.507);background-color: #0a7a865e;">
+            <div class="card-text">
+                <h3>{{post.title|capfirst}}</h3>
+                <small class="text-muted">{{post.dateOfPost|date:"F d, Y - h:i:s A"}}</small>
+            </div>
+            <div class="card pl-2 py-2 my-2" style="box-shadow: 1px 1px 1px rgba(13, 54, 54, 0.507);">
+                {{post.post}}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
 {% endblock content %}
+
+{% block jquery %}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('li').click(function () {
+            var usr = $(this).children()[0].dataset.id
+            var url = 'http://127.0.0.1:8000/following/' + usr
+            var myHtml = ''
+            $.ajax({
+                url: url,
+                type: 'get',
+                success: function (data) {
+                    for (var post of data.allposts) {
+                        var title = post.title[0].toUpperCase() + post.title.slice(1)
+                        var time = new Date(post.time)
+                        var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+                        myHtml = myHtml + `<div class="card mx-auto my-2 p-2"
+            style="box-shadow: 1px 1px 1px rgba(13, 54, 54, 0.507);background-color: #0a7a865e;">
+            <div class="card-text">
+                <h3>${title}</h3>
+                <small class="text-muted">${months[parseInt(time.toLocaleDateString('en-GB').split('/')[1]) - 1]} ${time.toLocaleDateString('en-GB').split('/')[0]}, ${time.toLocaleDateString('en-GB').split('/')[2]} - ${time.toLocaleTimeString('en-US')}</small>
+            </div>
+            <div class="card pl-2 py-2 my-2" style="box-shadow: 1px 1px 1px rgba(13, 54, 54, 0.507);">
+                ${post.post}
+            </div>
+        </div>`
+                    }
+                    $('[data-id=myfollowpost]').html(myHtml)
+                },
+                error: function (data) {
+                    console.log('error')
+                }
+            })
+        })
+    })
+</script>
+
+{% endblock jquery %}

@@ -3,13 +3,13 @@
 {% block title %}My Posts{% endblock title %}
 
 {% block content %}
+<div class="container myContent">
 {% for post in posts %}
 <div class="card col-10 mx-auto my-2"
     style="box-shadow: 1px 1px 1px rgba(13, 54, 54, 0.507);background-color: #0a7a865e;">
     <div class="card-text">
         <h3>{{post.title|capfirst}}</h3>
-        <small><label class="text-muted">{{post.dateOfPost|date:"F d, Y - H : i A"}}</label> by
-            <label class="text-danger">{{post.author|capfirst}}</label></small>
+        <small><label class="text-muted">{{post.dateOfPost|date:"F d, Y - h:i:s A"}}</label></small>
     </div>
     <div class="card pl-2 py-2 my-2" style="box-shadow: 1px 1px 1px rgba(13, 54, 54, 0.507);">
         {{post.post}}
@@ -23,4 +23,5 @@
     </div>
 </div>
 {% endfor %}
+</div>
 {% endblock content %}

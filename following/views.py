@@ -28,8 +28,8 @@ def followPage(response):
 
 @login_required(login_url='../login')
 def followingPost(response, usr):
+    print('in wrong')
     if response.method == "GET" and response.is_ajax():
-
         user = User.objects.filter(username=usr)[0]
         posts = Posts.objects.filter(author_id=user.id).order_by('-dateOfPost')
         allposts = []
@@ -59,6 +59,7 @@ def followingPost(response, usr):
 
 @login_required(login_url='../login')
 def following(response):
+    print('in right')
     if response.method == "GET" and response.is_ajax():
         followingId = response.GET['id']
         indicator = response.GET['indicator']

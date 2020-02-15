@@ -40,7 +40,7 @@
         {% for follow in myFollow %}
         {% for usr in follow.usr %}
         <ul class="m-2 side-username">
-            <li>
+            <li class="user">
                 <a class="side-username-anchor" href="#" data-id="{{usr.username}}">{{usr.username|capfirst}}</a>
             </li>
         </ul>
@@ -70,9 +70,9 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $('li').click(function () {
+        $('li.user').click(function () {
             var usr = $(this).children()[0].dataset.id
-            var url = 'http://127.0.0.1:8000/following/' + usr
+            var url = 'http://127.0.0.1:8000/following/post/' + usr
             var myHtml = ''
             $.ajax({
                 url: url,

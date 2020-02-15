@@ -2,26 +2,65 @@
 
 {% block title %}My Posts{% endblock title %}
 
+{% block myPostCss %}
+
+<style>
+    .delBut {
+        float: right;
+    }
+
+    .myTitle {
+        display: inline-block;
+    }
+
+    .myDate {
+        display: block;
+    }
+</style>
+
+{% endblock myPostCss %}
+
 {% block content %}
-<div class="container myContent">
-{% for post in posts %}
-<div class="card col-10 mx-auto my-2"
-    style="box-shadow: 1px 1px 1px rgba(13, 54, 54, 0.507);background-color: #0a7a865e;">
-    <div class="card-text">
-        <h3>{{post.title|capfirst}}</h3>
-        <small><label class="text-muted">{{post.dateOfPost|date:"F d, Y - h:i:s A"}}</label></small>
+<div class="container myContent" data-id="myfollowpost">
+    {% for post in posts %}
+    <div class="card col-10 mx-auto my-2"
+        style="box-shadow: 1px 1px 1px rgba(13, 54, 54, 0.507);background-color: #0a7a865e;">
+        <div class="card-text">
+            <h3 class="myTitle">{{post.title|capfirst}}</h3>
+            <button class="btn btn-danger delBut mt-2 btn-sm" data-class="delete"
+                data-postId="{{post.id}}">Delete</button>
+            <small class="myDate"><label class="text-muted">{{post.dateOfPost|date:"F d, Y - h:i:s A"}}</label></small>
+        </div>
+        <div class="card pl-2 py-2 my-2" style="box-shadow: 1px 1px 1px rgba(13, 54, 54, 0.507);">
+            {{post.post}}
+        </div>
     </div>
-    <div class="card pl-2 py-2 my-2" style="box-shadow: 1px 1px 1px rgba(13, 54, 54, 0.507);">
-        {{post.post}}
+    {% empty %}
+    <div class="card col-10 mx-auto my-2"
+        style="box-shadow: 1px 1px 1px rgba(13, 54, 54, 0.507);background-color: #0a7a865e;">
+        <div class="card-text text-center">
+            Nothing to show
+        </div>
     </div>
+    {% endfor %}
 </div>
-{% empty %}
-<div class="card col-10 mx-auto my-2"
-    style="box-shadow: 1px 1px 1px rgba(13, 54, 54, 0.507);background-color: #0a7a865e;">
-    <div class="card-text text-center">
-        Nothing to show
-    </div>
-</div>
-{% endfor %}
-</div>
+<div id="test"></div>
 {% endblock content %}
+
+{% block delAjax %}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('[data-class=delete]').click(function (e) {
+            e.preventDefault();
+            var response = confirm('Are you want to delete?')
+            if (response == true) {
+                location.href = '/deletePost/' + $(this)[0].dataset.postid
+                // console.log($(this)[0].dataset)
+            }
+        })
+    })
+</script>
+
+{% endblock delAjax %}

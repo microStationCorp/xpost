@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from userposts import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,5 +29,6 @@ urlpatterns = [
     path('newpost/', include('newPost.urls')),
     path('global/', include('global.urls')),
     path('following/', include('following.urls')),
-    path('stat/', include('xpstat.urls'))
+    path('stat/', include('xpstat.urls')),
+    path('deletePost/<int:id>', views.deletePost, name="deletePost"),
 ]

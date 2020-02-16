@@ -57,6 +57,24 @@ def followingPost(response, usr):
 
 
 @login_required(login_url='../login')
+def followCount(response):
+    if response.method == "GET" and response.is_ajax():
+        return HttpResponse(Follower.objects.filter(follower_id=response.user.id).count())
+    else:
+        return HttpResponse('''<h1 style="border-bottom: 1px solid #aaa; padding: 10px" > Not Found(  # 404)</h1>
+
+    <div class="alert alert-danger" >
+        Page not found. </div >
+
+    <p>
+        The above error occurred while the Web server was processing your request.
+    </p>
+    <p>
+        Please contact us if you think this is a server error. Thank you.
+    </p>''')
+
+
+@login_required(login_url='../login')
 def following(response):
     if response.method == "GET" and response.is_ajax():
         followingId = response.GET['id']

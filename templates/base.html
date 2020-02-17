@@ -100,7 +100,7 @@
             $('[data-id=myAjaxFollow]').click(function () {
                 if (($(this)[0].nextElementSibling.classList).length == 1) {
                     $.ajax({
-                        url: '../following/count/',
+                        url: 'http://127.0.0.1:8000/following/count/',
                         type: 'GET',
                         success: function (data) {
                             $('#follow-count').text(data)
@@ -118,7 +118,7 @@
             $('[data-id=myAjaxPost]').click(function () {
                 if (($(this)[0].nextElementSibling.classList).length == 1) {
                     $.ajax({
-                        url: '../posts/countPost/',
+                        url: 'http://127.0.0.1:8000/posts/countPost/',
                         type: 'GET',
                         success: function (data) {
                             // console.log(data)

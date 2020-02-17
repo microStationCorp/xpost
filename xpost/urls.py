@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from userposts import views
+from newPost import views as newpv
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,4 +32,5 @@ urlpatterns = [
     path('following/', include('following.urls')),
     path('stat/', include('xpstat.urls')),
     path('deletePost/<int:id>', views.deletePost, name="deletePost"),
+    path('updatepost/<int:id>', newpv.updatePost, name='updatepost')
 ]

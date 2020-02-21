@@ -15,8 +15,6 @@ def register(response):
             pass1 = form.cleaned_data['password1']
             pass2 = form.cleaned_data['password2']
             username = form.cleaned_data['username']
-            first_name = form.cleaned_data['first_name']
-            last_name = form.cleaned_data['last_name']
             email = form.cleaned_data['email']
             if pass1 != pass2:
                 messages.warning(response, 'password doesnot match')
@@ -29,7 +27,7 @@ def register(response):
                 return redirect('../register')
             else:
                 user = User.objects.create_user(
-                    username=username, password=pass1, first_name=first_name, last_name=last_name, email=email)
+                    username=username, password=pass1, email=email)
                 user.save()
                 messages.info(response, 'Succesfully registered')
                 return redirect('../login')

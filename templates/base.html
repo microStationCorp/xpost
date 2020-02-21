@@ -9,6 +9,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>{% block title %}{% endblock title%}</title>
     <style>
         .myContent {
@@ -17,6 +20,19 @@
 
         .myAuthor {
             cursor: pointer;
+        }
+
+        .brdr {
+            border: 1px solid black;
+        }
+
+        #icons i:hover {
+            color: #d32f2f;
+            transition: .4s;
+        }
+
+        .fa-thumbs-up, .fa-thumbs-down, .myreport {
+            color: #d32f2f;
         }
     </style>
     {% block followcss %}
@@ -82,11 +98,11 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
     <script type="text/javascript">
         function logout() {
             let response = confirm('Are You sure?')
@@ -111,7 +127,7 @@
                     })
                 }
             })
-        })
+        });
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -130,7 +146,39 @@
                     })
                 }
             })
-        })
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-id=like]').click(function (e) {
+                e.preventDefault();
+                if (this.classList.contains('fa-thumbs-o-up')) {
+                    $(this).removeClass('fa-thumbs-o-up')
+                    $(this).addClass('fa-thumbs-up')
+                } else {
+                    $(this).removeClass('fa-thumbs-up')
+                    $(this).addClass('fa-thumbs-o-up')
+                }
+            })
+            $('[data-id=dislike]').click(function (e) {
+                e.preventDefault();
+                if (this.classList.contains('fa-thumbs-o-down')) {
+                    $(this).removeClass('fa-thumbs-o-down')
+                    $(this).addClass('fa-thumbs-down')
+                } else {
+                    $(this).removeClass('fa-thumbs-down')
+                    $(this).addClass('fa-thumbs-o-down')
+                }
+            })
+            $('[data-id=report]').click(function (e) {
+                e.preventDefault();
+                if (this.classList.contains('myreport')) {
+                    $(this).removeClass('myreport')
+                } else {
+                    $(this).addClass('myreport')
+                }
+            })
+        });
     </script>
     {% block jquery %}
     {% endblock jquery %}

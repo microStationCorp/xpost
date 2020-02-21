@@ -19,6 +19,17 @@
         <div class="card pl-2 py-2 my-2" style="box-shadow: 1px 1px 1px rgba(13, 54, 54, 0.507);">
             {{post.post.post}}
         </div>
+        <div id="icons" class="row justify-content-end">
+            <div class="col-1">
+                <i data-id="like" class="fa fa-thumbs-o-up fa-2" aria-hidden="true"></i>
+            </div>
+            <div class="col-1">
+                <i data-id="dislike" class="fa fa-thumbs-o-down fa-2" aria-hidden="true"></i>
+            </div>
+            <div class="col-1">
+                <i data-id="report" class="fa fa-bug fa-2" aria-hidden="true"></i>
+            </div>
+        </div>
     </div>
     {% endfor %}
 </div>

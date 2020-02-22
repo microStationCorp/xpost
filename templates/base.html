@@ -26,12 +26,14 @@
             border: 1px solid black;
         }
 
-        #icons i:hover {
+        .icons i:hover {
             color: #d32f2f;
             transition: .4s;
         }
 
-        .fa-thumbs-up, .fa-thumbs-down, .myreport {
+        .fa-thumbs-up,
+        .fa-thumbs-down,
+        .myreport {
             color: #d32f2f;
         }
     </style>
@@ -150,8 +152,8 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $('[data-id=like]').click(function (e) {
-                e.preventDefault();
+            $('[data-id=like]').on("click", function (e) {
+                // e.preventDefault();
                 if (this.classList.contains('fa-thumbs-o-up')) {
                     $(this).removeClass('fa-thumbs-o-up')
                     $(this).addClass('fa-thumbs-up')
@@ -160,8 +162,9 @@
                     $(this).addClass('fa-thumbs-o-up')
                 }
             })
+
             $('[data-id=dislike]').click(function (e) {
-                e.preventDefault();
+                // e.preventDefault();
                 if (this.classList.contains('fa-thumbs-o-down')) {
                     $(this).removeClass('fa-thumbs-o-down')
                     $(this).addClass('fa-thumbs-down')
@@ -171,7 +174,7 @@
                 }
             })
             $('[data-id=report]').click(function (e) {
-                e.preventDefault();
+                // e.preventDefault();
                 if (this.classList.contains('myreport')) {
                     $(this).removeClass('myreport')
                 } else {

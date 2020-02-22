@@ -120,7 +120,35 @@
         </div>`
                     }
                     $('[data-id=myfollowpost]').html(myHtml);
-                    console.log($('[data-id=like]'))
+                    $('[data-id=like]').click(function (e) {
+                        e.preventDefault();
+                        if (this.classList.contains('fa-thumbs-o-up')) {
+                            $(this).removeClass('fa-thumbs-o-up')
+                            $(this).addClass('fa-thumbs-up')
+                        } else {
+                            $(this).removeClass('fa-thumbs-up')
+                            $(this).addClass('fa-thumbs-o-up')
+                        }
+                    })
+
+                    $('[data-id=dislike]').click(function (e) {
+                        // e.preventDefault();
+                        if (this.classList.contains('fa-thumbs-o-down')) {
+                            $(this).removeClass('fa-thumbs-o-down')
+                            $(this).addClass('fa-thumbs-down')
+                        } else {
+                            $(this).removeClass('fa-thumbs-down')
+                            $(this).addClass('fa-thumbs-o-down')
+                        }
+                    })
+                    $('[data-id=report]').click(function (e) {
+                        // e.preventDefault();
+                        if (this.classList.contains('myreport')) {
+                            $(this).removeClass('myreport')
+                        } else {
+                            $(this).addClass('myreport')
+                        }
+                    })
                 },
                 error: function (data) {
                     console.log('error')

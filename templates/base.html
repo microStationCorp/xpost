@@ -152,8 +152,8 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $('[data-id=like]').on("click", function (e) {
-                // e.preventDefault();
+            $('.icons').on('click', '[data-id=like]', function (e) {
+                e.preventDefault();
                 if (this.classList.contains('fa-thumbs-o-up')) {
                     $(this).removeClass('fa-thumbs-o-up')
                     $(this).addClass('fa-thumbs-up')

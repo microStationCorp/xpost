@@ -12,13 +12,13 @@ def followPage(response):
 
     myFollow = Follower.objects.filter(follower_id=response.user.id)
     myFollowingUser = []
-    posts = Posts.objects.filter(
-        author_id=myFollow[0].following_id).order_by('-dateOfPost')
 
     for f in myFollow:
         myFollowingUser.append({
             'usr': User.objects.filter(id=f.following_id)
         })
+    posts = Posts.objects.filter(
+        author_id=myFollowingUser[0]['usr'][0].id).order_by('-dateOfPost')
     context = {
         'myFollow': myFollowingUser,
         'posts': posts

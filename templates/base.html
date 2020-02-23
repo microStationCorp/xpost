@@ -105,6 +105,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
+    <!-- logout -->
     <script type="text/javascript">
         function logout() {
             let response = confirm('Are You sure?')
@@ -113,6 +114,7 @@
             }
         }
     </script>
+    <!-- follow count -->
     <script type="text/javascript">
         $(document).ready(function () {
             $('[data-id=myAjaxFollow]').click(function () {
@@ -131,6 +133,7 @@
             })
         });
     </script>
+    <!-- post count -->
     <script type="text/javascript">
         $(document).ready(function () {
             $('[data-id=myAjaxPost]').click(function () {
@@ -150,41 +153,8 @@
             })
         });
     </script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('[data-id=like]').click(function (e) {
-                e.preventDefault();
-                if (this.classList.contains('fa-thumbs-o-up')) {
-                    $(this).removeClass('fa-thumbs-o-up')
-                    $(this).addClass('fa-thumbs-up')
-                } else {
-                    $(this).removeClass('fa-thumbs-up')
-                    $(this).addClass('fa-thumbs-o-up')
-                }
-            })
-
-            $('[data-id=dislike]').click(function (e) {
-                // e.preventDefault();
-                if (this.classList.contains('fa-thumbs-o-down')) {
-                    $(this).removeClass('fa-thumbs-o-down')
-                    $(this).addClass('fa-thumbs-down')
-                } else {
-                    $(this).removeClass('fa-thumbs-down')
-                    $(this).addClass('fa-thumbs-o-down')
-                }
-            })
-            $('[data-id=report]').click(function (e) {
-                // e.preventDefault();
-                if (this.classList.contains('myreport')) {
-                    $(this).removeClass('myreport')
-                } else {
-                    $(this).addClass('myreport')
-                }
-            })
-        });
-    </script>
-    {% block jquery %}
-    {% endblock jquery %}
+    {% block followpagejquery %}
+    {% endblock followpagejquery %}
     {% block delAjax %}
     {% endblock delAjax %}
 </body>

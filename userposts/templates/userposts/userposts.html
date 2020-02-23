@@ -41,13 +41,13 @@
 
         <div class="row justify-content-end">
             <div class="col-1">
-                <i class="fa fa-thumbs-o-up fa-2" aria-hidden="true"></i>
+                <i class="fa fa-thumbs-o-up fa-2" aria-hidden="true"> {{post.like.count|default:"0"}}</i>
             </div>
             <div class="col-1">
-                <i class="fa fa-thumbs-o-down fa-2" aria-hidden="true"></i>
+                <i class="fa fa-thumbs-o-down fa-2" aria-hidden="true"> {{post.dislike.count|default:"0"}}</i>
             </div>
             <div class="col-1">
-                <i class="fa fa-bug fa-2" aria-hidden="true"></i>
+                <i class="fa fa-bug fa-2" aria-hidden="true"> {{post.report.count|default:"0"}}</i>
             </div>
         </div>
 

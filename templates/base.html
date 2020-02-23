@@ -152,7 +152,7 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $('.icons').on('click', '[data-id=like]', function (e) {
+            $('[data-id=like]').click(function (e) {
                 e.preventDefault();
                 if (this.classList.contains('fa-thumbs-o-up')) {
                     $(this).removeClass('fa-thumbs-o-up')

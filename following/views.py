@@ -36,7 +36,10 @@ def followingPost(response, usr):
             allposts.append({
                 'title': post.title,
                 'time': post.dateOfPost,
-                'post': post.post
+                'post': post.post,
+                'like':post.like.count(),
+                'dislike':post.dislike.count(),
+                'report':post.report.count(),
             })
         data = {
             'allposts': allposts

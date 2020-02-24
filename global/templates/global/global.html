@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Global Post{% endblock title %}
 
@@ -21,13 +22,14 @@
         </div>
         <div class="icons row justify-content-end">
             <div class="col-1">
-                <i data-id="like" class="fa fa-thumbs-o-up fa-2" aria-hidden="true"></i>
+                <i data-id="like" class="fa fa-thumbs-o-up fa-2" aria-hidden="true"> {{post.post.like.count|default:"0"}}</i>
             </div>
             <div class="col-1">
-                <i data-id="dislike" class="fa fa-thumbs-o-down fa-2" aria-hidden="true"></i>
+                <i data-id="dislike" class="fa fa-thumbs-o-down fa-2" aria-hidden="true">
+                    {{post.post.dislike.count|default:"0"}}</i>
             </div>
             <div class="col-1">
-                <i data-id="report" class="fa fa-bug fa-2" aria-hidden="true"></i>
+                <i data-id="report" class="fa fa-bug fa-2" aria-hidden="true"> {{post.post.report.count|default:"0"}}</i>
             </div>
         </div>
     </div>
@@ -35,38 +37,6 @@
 </div>
 {% endblock content %}
 
-{% block jquery %}
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('.myAuthor').click(function (e) {
-            e.preventDefault();
-            var auth_id = $(this)[0].dataset.id
-            var indicator = $(this).text()
-            if (indicator == 'follow') {
-                ajaxCall(auth_id, indicator)
-            } else if (indicator == 'unfollow') {
-                ajaxCall(auth_id, indicator)
-            }
-        })
-
-        function ajaxCall(id, indicator) {
-            $.ajax({
-                url: '../following/follow',
-                type: 'GET',
-                data: {
-                    'id': id,
-                    'indicator': indicator
-                },
-                success: function (data) {
-                    $("[data-id='" + id + "']").removeClass(data.rmc)
-                    $("[data-id='" + id + "']").addClass(data.ac)
-                    $("[data-id='" + id + "']").text(data.text)
-                },
-                error: function (error) {
-                    alert('error')
-                }
-            })
-        }
-    })
-</script>
-{% endblock jquery %}
+{% block fujquery %}
+<script src="{% static 'js/followUnfollow.js' %}"></script>
+{% endblock fujquery %}

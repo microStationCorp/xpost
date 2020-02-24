@@ -26,13 +26,13 @@ $(document).ready(function () {
         </div>
         <div class="row justify-content-end icons">
             <div class="col-1">
-                <i data-id="like" class="fa fa-thumbs-o-up fa-2" aria-hidden="true"></i>
+                <i data-id="like" class="fa fa-thumbs-o-up fa-2" aria-hidden="true"> ${post.like}</i>
             </div>
             <div class="col-1">
-                <i data-id="dislike" class="fa fa-thumbs-o-down fa-2" aria-hidden="true"></i>
+                <i data-id="dislike" class="fa fa-thumbs-o-down fa-2" aria-hidden="true"> ${post.dislike}</i>
             </div>
             <div class="col-1">
-                <i data-id="report" class="fa fa-bug fa-2" aria-hidden="true"></i>
+                <i data-id="report" class="fa fa-bug fa-2" aria-hidden="true"> ${post.report}</i>
             </div>
         </div>
     </div>`

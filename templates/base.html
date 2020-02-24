@@ -106,53 +106,11 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
     <!-- logout -->
-    <script type="text/javascript">
-        function logout() {
-            let response = confirm('Are You sure?')
-            if (response == true) {
-                location.href = '../logout'
-            }
-        }
-    </script>
+    <script src="{% static 'js/logout.js' %}"></script>
     <!-- follow count -->
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('[data-id=myAjaxFollow]').click(function () {
-                if (($(this)[0].nextElementSibling.classList).length == 1) {
-                    $.ajax({
-                        url: 'http://127.0.0.1:8000/following/count/',
-                        type: 'GET',
-                        success: function (data) {
-                            $('#follow-count').text(data)
-                        },
-                        error: function () {
-                            console.log('error')
-                        }
-                    })
-                }
-            })
-        });
-    </script>
+    <script src="{% static 'js/followCount.js' %}"></script>
     <!-- post count -->
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('[data-id=myAjaxPost]').click(function () {
-                if (($(this)[0].nextElementSibling.classList).length == 1) {
-                    $.ajax({
-                        url: 'http://127.0.0.1:8000/posts/countPost/',
-                        type: 'GET',
-                        success: function (data) {
-                            // console.log(data)
-                            $('#post-count').text(data)
-                        },
-                        error: function () {
-                            console.log('error')
-                        }
-                    })
-                }
-            })
-        });
-    </script>
+    <script src="{% static 'js/postCount.js' %}"></script>
     {% block followpagejquery %}
     {% endblock followpagejquery %}
     {% block delAjax %}

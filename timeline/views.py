@@ -12,4 +12,24 @@ def timeline(response):
     for f in myFollowing:
         ids.append(f.following_id)
     allPosts = Posts.objects.filter(author_id__in=ids).order_by('-dateOfPost')
-    return render(response, 'timeline/timeline.html', {'posts': allPosts})
+    posts = []
+    for i in allPosts:
+        likeState = False
+        dislikeState = False
+        reportState = False
+        if i.like.filter(id=response.user.id).count() != 0:
+            likeState = True
+
+        if i.dislike.filter(id=response.user.id).count() != 0:
+            dislikeState = True
+
+        if i.report.filter(id=response.user.id).count() != 0:
+            reportState = True
+
+        posts.append({
+            'post': i,
+            'likeState': likeState,
+            'dislikeState': dislikeState,
+            'reportState': reportState
+        })
+    return render(response, 'timeline/timeline.html', {'posts': posts})

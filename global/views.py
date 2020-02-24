@@ -12,12 +12,27 @@ def globalPost(response):
     allPosts = Posts.objects.all().order_by('-dateOfPost')
     myFollow = Follower.objects.filter(follower_id=response.user.id)
     for post in allPosts:
+        likeState = False
+        dislikeState = False
+        reportState = False
+        if post.like.filter(id=response.user.id).count() != 0:
+            likeState = True
+
+        if post.dislike.filter(id=response.user.id).count() != 0:
+            dislikeState = True
+
+        if post.report.filter(id=response.user.id).count() != 0:
+            reportState = True
+
         for f in myFollow:
             if f.following_id == post.author_id:
                 posts.append({
                     'post': post,
                     'indication': 'unfollow',
-                    'color': 'text-success'
+                    'color': 'text-success',
+                    'likeState': likeState,
+                    'dislikeState': dislikeState,
+                    'reportState': reportState
                 })
                 flag = True
                 break
@@ -25,13 +40,19 @@ def globalPost(response):
             posts.append({
                 'post': post,
                 'indication': '',
-                'color': 'text-success'
+                'color': 'text-success',
+                'likeState': likeState,
+                'dislikeState': dislikeState,
+                'reportState': reportState
             })
         elif flag == False:
             posts.append({
                 'post': post,
                 'indication': 'follow',
-                'color': 'text-primary'
+                'color': 'text-primary',
+                'likeState': likeState,
+                'dislikeState': dislikeState,
+                'reportState': reportState,
             })
         else:
             flag = False

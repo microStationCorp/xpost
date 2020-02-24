@@ -32,5 +32,6 @@ urlpatterns = [
     path('following/', include('following.urls')),
     path('stat/', include('xpstat.urls')),
     path('deletePost/<int:id>', views.deletePost, name="deletePost"),
-    path('updatepost/<int:id>', newpv.updatePost, name='updatepost')
+    path('updatepost/<int:id>', newpv.updatePost, name='updatepost'),
+    path('likepost/', views.likePost, name='postlike')
 ]

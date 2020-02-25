@@ -19,14 +19,19 @@
             <div class="col-1">
                 <i data-likestate="{{post.likeState}}" data-postid="{{post.post.id}}" data-id="like"
                     class="fa fa-thumbs-o-up fa-2" aria-hidden="true">
-                    {{post.post.like.count|default:"0"}}</i>
+                    <span>
+                        {{post.post.like.count|default:"0"}}
+                    </span>
+                </i>
             </div>
             <div class="col-1">
-                <i data-dislikestate="{{post.dislikeState}}" data-postid="{{post.post.id}}" data-id="dislike" class="fa fa-thumbs-o-down fa-2" aria-hidden="true">
+                <i data-dislikestate="{{post.dislikeState}}" data-postid="{{post.post.id}}" data-id="dislike"
+                    class="fa fa-thumbs-o-down fa-2" aria-hidden="true">
                     {{post.post.dislike.count|default:"0"}}</i>
             </div>
             <div class="col-1">
-                <i data-reportstate="{{post.reportState}}" data-postid="{{post.post.id}}" data-id="report" class="fa fa-bug fa-2" aria-hidden="true">
+                <i data-reportstate="{{post.reportState}}" data-postid="{{post.post.id}}" data-id="report"
+                    class="fa fa-bug fa-2" aria-hidden="true">
                     {{post.post.report.count|default:"0"}}</i>
             </div>
         </div>

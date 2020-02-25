@@ -73,11 +73,15 @@ def deletePost(response, id):
 def likePost(response):
     if response.method == "GET" and response.is_ajax():
         if Posts.objects.filter(id=response.GET['postid'], like__id=response.user.id).count() == 0:
+            Posts.objects.get(
+                id=response.GET['postid']).like.add(response.user)
             data = {
                 'like-count': Posts.objects.get(id=response.GET['postid']).like.count(),
                 'like-action': 'increase',
             }
         else:
+            Posts.objects.get(
+                id=response.GET['postid']).like.remove(response.user)
             data = {
                 'like-count': Posts.objects.get(id=response.GET['postid']).like.count(),
                 'like-action': 'decrease',

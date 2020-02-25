@@ -32,11 +32,11 @@ $(document).ready(function () {
         <div class="card-text">
             <h3>${title}</h3>
             <small class="text-muted">${
-              months[
-                parseInt(time.toLocaleDateString("en-GB").split("/")[1]) - 1
-              ]
+            months[
+            parseInt(time.toLocaleDateString("en-GB").split("/")[1]) - 1
+            ]
             } ${time.toLocaleDateString("en-GB").split("/")[0]}, ${
-              time.toLocaleDateString("en-GB").split("/")[2]
+            time.toLocaleDateString("en-GB").split("/")[2]
             } - ${time.toLocaleTimeString("en-US")}</small>
         </div>
         <div class="card pl-2 py-2 my-2" style="box-shadow: 1px 1px 1px rgba(13, 54, 54, 0.507);">
@@ -45,23 +45,23 @@ $(document).ready(function () {
         <div class="row justify-content-end icons">
             <div class="col-1">
                 <i data-postid="${post.id}" data-likestate="${
-                  post.likeState
-                }" data-id="like" class="fa fa-thumbs-o-up fa-2" aria-hidden="true"> ${
-              post.like
+            post.likeState
+            }" data-id="like" class="fa fa-thumbs-o-up fa-2" aria-hidden="true"> ${
+            post.like
             }</i>
             </div>
             <div class="col-1">
                 <i data-postid="${post.id}" data-dislikestate="${
-                  post.dislikeState
-                }" data-id="dislike" class="fa fa-thumbs-o-down fa-2" aria-hidden="true"> ${
-              post.dislike
+            post.dislikeState
+            }" data-id="dislike" class="fa fa-thumbs-o-down fa-2" aria-hidden="true"> ${
+            post.dislike
             }</i>
             </div>
             <div class="col-1">
                 <i data-postid="${post.id}" data-reportstate="${
-                  post.reportState
-                }" data-id="report" class="fa fa-bug fa-2" aria-hidden="true"> ${
-              post.report
+            post.reportState
+            }" data-id="report" class="fa fa-bug fa-2" aria-hidden="true"> ${
+            post.report
             }</i>
             </div>
         </div>

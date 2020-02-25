@@ -26,18 +26,24 @@ $(document).ready(function () {
         </div>
         <div class="row justify-content-end icons">
             <div class="col-1">
-                <i data-id="like" class="fa fa-thumbs-o-up fa-2" aria-hidden="true"> ${post.like}</i>
+                <i data-likestate="${post.likeState}" data-id="like" class="fa fa-thumbs-o-up fa-2" aria-hidden="true"> ${post.like}</i>
             </div>
             <div class="col-1">
-                <i data-id="dislike" class="fa fa-thumbs-o-down fa-2" aria-hidden="true"> ${post.dislike}</i>
+                <i data-dislikestate="${post.dislikeState}" data-id="dislike" class="fa fa-thumbs-o-down fa-2" aria-hidden="true"> ${post.dislike}</i>
             </div>
             <div class="col-1">
-                <i data-id="report" class="fa fa-bug fa-2" aria-hidden="true"> ${post.report}</i>
+                <i data-reportstate="${post.reportState}" data-id="report" class="fa fa-bug fa-2" aria-hidden="true"> ${post.report}</i>
             </div>
         </div>
     </div>`
                 }
                 $('[data-id=myfollowpost]').html(myHtml);
+                $('[data-likestate=true]').removeClass('fa-thumbs-o-up')
+                $('[data-likestate=true]').addClass('fa-thumbs-up')
+                $('[data-dislikestate=true]').removeClass('fa-thumbs-o-up')
+                $('[data-dislikestate=true]').addClass('fa-thumbs-up')
+                $('[data-reportstate=true]').removeClass('fa-thumbs-o-up')
+                $('[data-reportstate=true]').addClass('fa-thumbs-up')
             },
             error: function (data) {
                 console.log('error')

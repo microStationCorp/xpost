@@ -17,8 +17,28 @@ def followPage(response):
         myFollowingUser.append({
             'usr': User.objects.filter(id=f.following_id)
         })
-    posts = Posts.objects.filter(
+    allPosts = Posts.objects.filter(
         author_id=myFollowingUser[0]['usr'][0].id).order_by('-dateOfPost')
+    posts = []
+    for i in allPosts:
+        likeState = False
+        dislikeState = False
+        reportState = False
+        if i.like.filter(id=response.user.id).count() != 0:
+            likeState = True
+
+        if i.dislike.filter(id=response.user.id).count() != 0:
+            dislikeState = True
+
+        if i.report.filter(id=response.user.id).count() != 0:
+            reportState = True
+
+        posts.append({
+            'post': i,
+            'likeState': likeState,
+            'dislikeState': dislikeState,
+            'reportState': reportState
+        })
     context = {
         'myFollow': myFollowingUser,
         'posts': posts
@@ -33,13 +53,27 @@ def followingPost(response, usr):
         posts = Posts.objects.filter(author_id=user.id).order_by('-dateOfPost')
         allposts = []
         for post in posts:
+            likeState = False
+            dislikeState = False
+            reportState = False
+            if post.like.filter(id=response.user.id).count() != 0:
+                likeState = True
+
+            if post.dislike.filter(id=response.user.id).count() != 0:
+                dislikeState = True
+
+            if post.report.filter(id=response.user.id).count() != 0:
+                reportState = True
             allposts.append({
                 'title': post.title,
                 'time': post.dateOfPost,
                 'post': post.post,
-                'like':post.like.count(),
-                'dislike':post.dislike.count(),
-                'report':post.report.count(),
+                'like': post.like.count(),
+                'dislike': post.dislike.count(),
+                'report': post.report.count(),
+                'likeState': likeState,
+                'dislikeState': dislikeState,
+                'reportState': reportState,
             })
         data = {
             'allposts': allposts

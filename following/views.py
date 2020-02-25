@@ -65,6 +65,7 @@ def followingPost(response, usr):
             if post.report.filter(id=response.user.id).count() != 0:
                 reportState = True
             allposts.append({
+                'id': post.id,
                 'title': post.title,
                 'time': post.dateOfPost,
                 'post': post.post,

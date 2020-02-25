@@ -73,10 +73,16 @@ def deletePost(response, id):
 def likePost(response):
     if response.method == "GET" and response.is_ajax():
         if Posts.objects.filter(id=response.GET['postid'], like__id=response.user.id).count() == 0:
-            data = "not liked by user"
+            data = {
+                'like-count': Posts.objects.get(id=response.GET['postid']).like.count(),
+                'like-action': 'increase',
+            }
         else:
-            data = "liked by user"
-        return HttpResponse(data)
+            data = {
+                'like-count': Posts.objects.get(id=response.GET['postid']).like.count(),
+                'like-action': 'decrease',
+            }
+        return JsonResponse(data)
     else:
         return HttpResponse('''<h1 style="border-bottom: 1px solid #aaa; padding: 10px" > Not Found(  # 404)</h1>
 

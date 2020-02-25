@@ -1,12 +1,12 @@
-$(document).ready(function() {
-  $("li.user").click(function() {
+$(document).ready(function () {
+  $("li.user").click(function () {
     var usr = $(this).children()[0].dataset.id;
     var url = "http://127.0.0.1:8000/following/post/" + usr;
     var myHtml = "";
     $.ajax({
       url: url,
       type: "get",
-      success: function(data) {
+      success: function (data) {
         for (var post of data.allposts) {
           var title = post.title[0].toUpperCase() + post.title.slice(1);
           var time = new Date(post.time);
@@ -44,21 +44,21 @@ $(document).ready(function() {
         </div>
         <div class="row justify-content-end icons">
             <div class="col-1">
-                <i data-likestate="${
+                <i data-postid="${post.id}" data-likestate="${
                   post.likeState
                 }" data-id="like" class="fa fa-thumbs-o-up fa-2" aria-hidden="true"> ${
               post.like
             }</i>
             </div>
             <div class="col-1">
-                <i data-dislikestate="${
+                <i data-postid="${post.id}" data-dislikestate="${
                   post.dislikeState
                 }" data-id="dislike" class="fa fa-thumbs-o-down fa-2" aria-hidden="true"> ${
               post.dislike
             }</i>
             </div>
             <div class="col-1">
-                <i data-reportstate="${
+                <i data-postid="${post.id}" data-reportstate="${
                   post.reportState
                 }" data-id="report" class="fa fa-bug fa-2" aria-hidden="true"> ${
               post.report
@@ -74,8 +74,29 @@ $(document).ready(function() {
         $("[data-dislikestate=true]").addClass("fa-thumbs-up");
         $("[data-reportstate=true]").removeClass("fa-thumbs-o-up");
         $("[data-reportstate=true]").addClass("fa-thumbs-up");
+
+        $('[data-id=like]').click(function (e) {
+          e.preventDefault();
+          console.log('sujan grub')
+          var postid = $(this).data()['postid']
+          console.log('ready for ajax call')
+
+          $.ajax({
+            url: '../likepost',
+            type: 'GET',
+            data: {
+              'postid': postid
+            },
+            success: function (data) {
+              console.log(data)
+            },
+            error: function () {
+              console.log('error')
+            }
+          })
+        })
       },
-      error: function(data) {
+      error: function (data) {
         console.log("error");
       }
     });

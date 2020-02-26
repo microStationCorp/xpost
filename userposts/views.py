@@ -72,13 +72,26 @@ def deletePost(response, id):
 @login_required(login_url='../login')
 def likePost(response):
     if response.method == "GET" and response.is_ajax():
-        if Posts.objects.filter(id=response.GET['postid'], like__id=response.user.id).count() == 0:
+        # when not disliked and want to like
+        if Posts.objects.filter(id=response.GET['postid'], like__id=response.user.id).count() == 0 and Posts.objects.filter(id=response.GET['postid'], dislike__id=response.user.id).count() == 0:
             Posts.objects.get(
                 id=response.GET['postid']).like.add(response.user)
             data = {
                 'like-count': Posts.objects.get(id=response.GET['postid']).like.count(),
                 'like-action': 'increase',
             }
+        # when disliked and want to like
+        elif Posts.objects.filter(id=response.GET['postid'], like__id=response.user.id).count() == 0 and Posts.objects.filter(id=response.GET['postid'], dislike__id=response.user.id).count() != 0:
+            Posts.objects.get(
+                id=response.GET['postid']).dislike.remove(response.user)
+            Posts.objects.get(
+                id=response.GET['postid']).like.add(response.user)
+            data = {
+                'like-count': Posts.objects.get(id=response.GET['postid']).like.count(),
+                'dislike-count': Posts.objects.get(id=response.GET['postid']).dislike.count(),
+                'like-action': 'increase-disliked',
+            }
+        # when already liked
         else:
             Posts.objects.get(
                 id=response.GET['postid']).like.remove(response.user)
@@ -104,13 +117,27 @@ def likePost(response):
 @login_required(login_url='../login')
 def disLikePost(response):
     if response.method == "GET" and response.is_ajax():
-        if Posts.objects.filter(id=response.GET['postid'], dislike__id=response.user.id).count() == 0:
+        # when not liked and want to dislike
+        if Posts.objects.filter(id=response.GET['postid'], dislike__id=response.user.id).count() == 0 and Posts.objects.filter(id=response.GET['postid'], like__id=response.user.id).count() == 0:
             Posts.objects.get(
                 id=response.GET['postid']).dislike.add(response.user)
             data = {
                 'dislike-count': Posts.objects.get(id=response.GET['postid']).dislike.count(),
                 'dislike-action': 'increase',
             }
+        # when liked and want to dislike
+        elif Posts.objects.filter(id=response.GET['postid'], like__id=response.user.id).count() != 0 and Posts.objects.filter(id=response.GET['postid'], dislike__id=response.user.id).count() == 0:
+            Posts.objects.get(
+                id=response.GET['postid']).dislike.add(response.user)
+            Posts.objects.get(
+                id=response.GET['postid']).like.remove(response.user)
+            data = {
+                'dislike-count': Posts.objects.get(id=response.GET['postid']).dislike.count(),
+                'like-count': Posts.objects.get(id=response.GET['postid']).like.count(),
+                'dislike-action': 'increase-liked',
+            }
+            pass
+        # when already liked
         else:
             Posts.objects.get(
                 id=response.GET['postid']).dislike.remove(response.user)

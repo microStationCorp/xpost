@@ -15,6 +15,13 @@ $(document).ready(function () {
                     $("[data-id=like]:eq(" + ind + ")").children()[0].innerText = data['like-count']
                     $("[data-id=like]:eq(" + ind + ")").removeClass('fa-thumbs-o-up')
                     $("[data-id=like]:eq(" + ind + ")").addClass('fa-thumbs-up')
+                } else if (data['like-action'] == 'increase-disliked') {
+                    $("[data-id=like]:eq(" + ind + ")").children()[0].innerText = data['like-count']
+                    $("[data-id=like]:eq(" + ind + ")").removeClass('fa-thumbs-o-up')
+                    $("[data-id=like]:eq(" + ind + ")").addClass('fa-thumbs-up')
+                    $("[data-id=dislike]:eq(" + ind + ")").children()[0].innerText = data['dislike-count']
+                    $("[data-id=dislike]:eq(" + ind + ")").removeClass('fa-thumbs-down')
+                    $("[data-id=dislike]:eq(" + ind + ")").addClass('fa-thumbs-o-down')
                 } else {
                     $("[data-id=like]:eq(" + ind + ")").children()[0].innerText = data['like-count']
                     $("[data-id=like]:eq(" + ind + ")").removeClass('fa-thumbs-up')

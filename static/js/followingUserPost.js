@@ -46,23 +46,23 @@ $(document).ready(function () {
             <div class="col-1">
                 <i data-postid="${post.id}" data-likestate="${
             post.likeState
-            }" data-id="like" class="fa fa-thumbs-o-up fa-2" aria-hidden="true"> ${
+            }" data-id="like" class="fa fa-thumbs-o-up fa-2" aria-hidden="true"> <span>${
             post.like
-            }</i>
+            }</span></i>
             </div>
             <div class="col-1">
                 <i data-postid="${post.id}" data-dislikestate="${
             post.dislikeState
-            }" data-id="dislike" class="fa fa-thumbs-o-down fa-2" aria-hidden="true"> ${
+            }" data-id="dislike" class="fa fa-thumbs-o-down fa-2" aria-hidden="true"> <span>${
             post.dislike
-            }</i>
+            }</span></i>
             </div>
             <div class="col-1">
                 <i data-postid="${post.id}" data-reportstate="${
             post.reportState
-            }" data-id="report" class="fa fa-bug fa-2" aria-hidden="true"> ${
+            }" data-id="report" class="fa fa-bug fa-2" aria-hidden="true"> <span>${
             post.report
-            }</i>
+            }</span></i>
             </div>
         </div>
     </div>`;
@@ -70,16 +70,14 @@ $(document).ready(function () {
         $("[data-id=myfollowpost]").html(myHtml);
         $("[data-likestate=true]").removeClass("fa-thumbs-o-up");
         $("[data-likestate=true]").addClass("fa-thumbs-up");
-        $("[data-dislikestate=true]").removeClass("fa-thumbs-o-up");
-        $("[data-dislikestate=true]").addClass("fa-thumbs-up");
-        $("[data-reportstate=true]").removeClass("fa-thumbs-o-up");
-        $("[data-reportstate=true]").addClass("fa-thumbs-up");
+        $("[data-dislikestate=true]").removeClass("fa-thumbs-o-down");
+        $("[data-dislikestate=true]").addClass("fa-thumbs-down");
+        $("[data-reportstate=true]").addClass("myreport");
 
         $('[data-id=like]').click(function (e) {
           e.preventDefault();
-          console.log('sujan grub')
+          var ind = $('[data-id=like]').index(this)
           var postid = $(this).data()['postid']
-          console.log('ready for ajax call')
 
           $.ajax({
             url: '../likepost',
@@ -88,7 +86,69 @@ $(document).ready(function () {
               'postid': postid
             },
             success: function (data) {
-              console.log(data)
+              if (data['like-action'] == 'increase') {
+                $("[data-id=like]:eq(" + ind + ")").children()[0].innerText = data['like-count']
+                $("[data-id=like]:eq(" + ind + ")").removeClass('fa-thumbs-o-up')
+                $("[data-id=like]:eq(" + ind + ")").addClass('fa-thumbs-up')
+              } else {
+                $("[data-id=like]:eq(" + ind + ")").children()[0].innerText = data['like-count']
+                $("[data-id=like]:eq(" + ind + ")").removeClass('fa-thumbs-up')
+                $("[data-id=like]:eq(" + ind + ")").addClass('fa-thumbs-o-up')
+              }
+            },
+            error: function () {
+              console.log('error')
+            }
+          })
+        })
+
+        $('[data-id=report]').click(function (e) {
+          e.preventDefault();
+          var ind = $('[data-id=report]').index(this)
+          var postid = $(this).data()['postid']
+
+          $.ajax({
+            url: '../reportpost',
+            type: 'GET',
+            data: {
+              'postid': postid
+            },
+            success: function (data) {
+              if (data['report-action'] == 'increase') {
+                $("[data-id=report]:eq(" + ind + ")").children()[0].innerText = data['report-count']
+                $("[data-id=report]:eq(" + ind + ")").addClass('myreport')
+              } else {
+                $("[data-id=report]:eq(" + ind + ")").children()[0].innerText = data['report-count']
+                $("[data-id=report]:eq(" + ind + ")").removeClass('myreport')
+              }
+            },
+            error: function () {
+              console.log('error')
+            }
+          })
+        })
+
+        $('[data-id=dislike]').click(function (e) {
+          e.preventDefault();
+          var ind = $('[data-id=dislike]').index(this)
+          var postid = $(this).data()['postid']
+
+          $.ajax({
+            url: '../dislikepost',
+            type: 'GET',
+            data: {
+              'postid': postid
+            },
+            success: function (data) {
+              if (data['dislike-action'] == 'increase') {
+                $("[data-id=dislike]:eq(" + ind + ")").children()[0].innerText = data['dislike-count']
+                $("[data-id=dislike]:eq(" + ind + ")").removeClass('fa-thumbs-o-down')
+                $("[data-id=dislike]:eq(" + ind + ")").addClass('fa-thumbs-down')
+              } else {
+                $("[data-id=dislike]:eq(" + ind + ")").children()[0].innerText = data['dislike-count']
+                $("[data-id=dislike]:eq(" + ind + ")").removeClass('fa-thumbs-down')
+                $("[data-id=dislike]:eq(" + ind + ")").addClass('fa-thumbs-o-down')
+              }
             },
             error: function () {
               console.log('error')

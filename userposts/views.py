@@ -131,3 +131,35 @@ def disLikePost(response):
     <p>
         Please contact us if you think this is a server error. Thank you.
     </p>''')
+
+
+@login_required(login_url='../login')
+def reportPost(response):
+    if response.method == "GET" and response.is_ajax():
+        if Posts.objects.filter(id=response.GET['postid'], report__id=response.user.id).count() == 0:
+            Posts.objects.get(
+                id=response.GET['postid']).report.add(response.user)
+            data = {
+                'report-count': Posts.objects.get(id=response.GET['postid']).report.count(),
+                'report-action': 'increase',
+            }
+        else:
+            Posts.objects.get(
+                id=response.GET['postid']).report.remove(response.user)
+            data = {
+                'report-count': Posts.objects.get(id=response.GET['postid']).report.count(),
+                'report-action': 'decrease',
+            }
+        return JsonResponse(data)
+    else:
+        return HttpResponse('''<h1 style="border-bottom: 1px solid #aaa; padding: 10px" > Not Found(  # 404)</h1>
+
+    <div class="alert alert-danger" >
+        Page not found. </div >
+
+    <p>
+        The above error occurred while the Web server was processing your request.
+    </p>
+    <p>
+        Please contact us if you think this is a server error. Thank you.
+    </p>''')

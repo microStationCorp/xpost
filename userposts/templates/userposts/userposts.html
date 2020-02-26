@@ -17,6 +17,10 @@
     .myDate {
         display: block;
     }
+
+    i:hover {
+        cursor: pointer;
+    }
 </style>
 
 {% endblock myPostCss %}
@@ -34,7 +38,8 @@
                 <button class="btn btn-danger mt-2 btn-sm" data-class="delete" data-postId="{{post.post.id}}"
                     style="min-width: 70px;">Delete</button>
             </div>
-            <small class="myDate"><label class="text-muted">{{post.post.dateOfPost|date:"F d, Y - h:i:s A"}}</label></small>
+            <small class="myDate"><label
+                    class="text-muted">{{post.post.dateOfPost|date:"F d, Y - h:i:s A"}}</label></small>
         </div>
         <div class="card pl-2 py-2 my-2" style="box-shadow: 1px 1px 1px rgba(13, 54, 54, 0.507);">
             {{post.post.post}}
@@ -42,13 +47,19 @@
 
         <div class="row justify-content-end">
             <div class="col-1">
-                <i data-likestate="{{post.likeState}}" class="fa fa-thumbs-o-up fa-2" aria-hidden="true"> {{post.post.like.count|default:"0"}}</i>
+                <i data-likestate="{{post.likeState}}" data-postid="{{post.post.id}}" data-id="like"
+                    class="fa fa-thumbs-o-up fa-2" aria-hidden="true">
+                    <span>{{post.post.like.count|default:"0"}}</span></i>
             </div>
             <div class="col-1">
-                <i data-dislikestate="{{post.dislikeState}}" class="fa fa-thumbs-o-down fa-2" aria-hidden="true"> {{post.post.dislike.count|default:"0"}}</i>
+                <i data-postid="{{post.post.id}}" data-id="dislike" data-dislikestate="{{post.dislikeState}}"
+                    class="fa fa-thumbs-o-down fa-2" aria-hidden="true">
+                    <span>{{post.post.dislike.count|default:"0"}}</span></i>
             </div>
             <div class="col-1">
-                <i data-reportstate="{{post.reportState}}" class="fa fa-bug fa-2" aria-hidden="true"> {{post.post.report.count|default:"0"}}</i>
+                <i data-postid="{{post.post.id}}" data-id="report" data-reportstate="{{post.reportState}}"
+                    class="fa fa-bug fa-2" aria-hidden="true">
+                    <span>{{post.post.report.count|default:"0"}}</span></i>
             </div>
         </div>
 

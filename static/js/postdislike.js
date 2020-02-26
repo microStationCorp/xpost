@@ -1,10 +1,8 @@
 $(document).ready(function () {
     $('[data-id=dislike]').click(function (e) {
         e.preventDefault();
-        console.log('grub')
         var ind = $('[data-id=dislike]').index(this)
         var postid = $(this).data()['postid']
-        console.log(ind, postid)
 
         $.ajax({
             url: '../dislikepost',
@@ -13,7 +11,6 @@ $(document).ready(function () {
                 'postid': postid
             },
             success: function (data) {
-                console.log(data)
                 if (data['dislike-action'] == 'increase') {
                     $("[data-id=dislike]:eq(" + ind + ")").children()[0].innerText = data['dislike-count']
                     $("[data-id=dislike]:eq(" + ind + ")").removeClass('fa-thumbs-o-down')

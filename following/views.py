@@ -72,6 +72,7 @@ def followingPost(response, usr):
                 'like': post.like.count(),
                 'dislike': post.dislike.count(),
                 'report': post.report.count(),
+                'post_status': post.post_status,
                 'likeState': likeState,
                 'dislikeState': dislikeState,
                 'reportState': reportState,

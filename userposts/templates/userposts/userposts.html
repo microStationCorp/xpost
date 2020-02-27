@@ -28,7 +28,8 @@
 {% block content %}
 <div class="container myContent" data-id="myfollowpost">
     {% for post in posts %}
-    <div class="card col-10 mx-auto my-2"
+    {% if post.post.post_status %}
+    <div data-postCointainerId="cont-{{post.post.id}}" class="card col-10 mx-auto my-2"
         style="box-shadow: 1px 1px 1px rgba(13, 54, 54, 0.507);background-color: #0a7a865e;">
         <div class="card-text">
             <h3 class="myTitle">{{post.post.title|capfirst}}</h3>
@@ -64,6 +65,7 @@
         </div>
 
     </div>
+    {% endif %}
     {% empty %}
     <div class="card col-10 mx-auto my-2"
         style="box-shadow: 1px 1px 1px rgba(13, 54, 54, 0.507);background-color: #0a7a865e;">

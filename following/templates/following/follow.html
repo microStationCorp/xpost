@@ -51,7 +51,8 @@
 
     <div class="col-lg-8 col-md-10 col-10 col-sm-10 mybrdr" data-id="myfollowpost">
         {% for post in posts %}
-        <div class="card mx-auto my-2 p-2"
+        {% if post.post.post_status %}
+        <div data-postCointainerId="cont-{{post.post.id}}" class="card mx-auto my-2 p-2"
             style="box-shadow: 1px 1px 1px rgba(13, 54, 54, 0.507);background-color: #0a7a865e;">
             <div class="card-text">
                 <h3>{{post.post.title|capfirst}}</h3>
@@ -78,6 +79,7 @@
                 </div>
             </div>
         </div>
+        {% endif %}
         {% endfor %}
     </div>
 

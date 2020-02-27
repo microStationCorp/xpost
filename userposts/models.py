@@ -15,6 +15,7 @@ class Posts(models.Model):
         User, related_name="disliked_user", blank=True)
     report = models.ManyToManyField(
         User, related_name="reported_user", blank=True)
+    post_status = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title

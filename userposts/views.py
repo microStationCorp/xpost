@@ -166,16 +166,26 @@ def reportPost(response):
         if Posts.objects.filter(id=response.GET['postid'], report__id=response.user.id).count() == 0:
             Posts.objects.get(
                 id=response.GET['postid']).report.add(response.user)
+            if Posts.objects.get(id=response.GET['postid']).report.count() < 20:
+                post_display = 'show'
+            else:
+                post_display = 'hide'
+                p = Posts.objects.get(id=response.GET['postid'])
+                p.post_status = False
+                p.save()
             data = {
                 'report-count': Posts.objects.get(id=response.GET['postid']).report.count(),
                 'report-action': 'increase',
+                'post_display': post_display,
             }
         else:
             Posts.objects.get(
                 id=response.GET['postid']).report.remove(response.user)
+            post_display = 'show'
             data = {
                 'report-count': Posts.objects.get(id=response.GET['postid']).report.count(),
                 'report-action': 'decrease',
+                'post_display': post_display,
             }
         return JsonResponse(data)
     else:

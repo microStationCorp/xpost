@@ -11,13 +11,17 @@ $(document).ready(function () {
                 'postid': postid
             },
             success: function (data) {
-                console.log(data)
-                if (data['report-action'] == 'increase') {
-                    $("[data-id=report]:eq(" + ind + ")").children()[0].innerText = data['report-count']
-                    $("[data-id=report]:eq(" + ind + ")").addClass('myreport')
+                console.log(data['post_display'])
+                if (data['post_display'] == 'hide') {
+                    $("[data-postcointainerid=cont-" + postid + "]").hide()
                 } else {
-                    $("[data-id=report]:eq(" + ind + ")").children()[0].innerText = data['report-count']
-                    $("[data-id=report]:eq(" + ind + ")").removeClass('myreport')
+                    if (data['report-action'] == 'increase') {
+                        $("[data-id=report]:eq(" + ind + ")").children()[0].innerText = data['report-count']
+                        $("[data-id=report]:eq(" + ind + ")").addClass('myreport')
+                    } else {
+                        $("[data-id=report]:eq(" + ind + ")").children()[0].innerText = data['report-count']
+                        $("[data-id=report]:eq(" + ind + ")").removeClass('myreport')
+                    }
                 }
             },
             error: function () {

@@ -26,16 +26,27 @@
             border: 1px solid black;
         }
 
-        .icons i:hover {
-            color: #d32f2f;
-            transition: .4s;
-            cursor: pointer;
+        .icons i {
+            transition: .3s;
         }
 
-        .fa-thumbs-up,
-        .fa-thumbs-down,
-        .myreport {
+        .icons i:hover {
+            /* color: #d32f2f; */
+            transition: .4s;
+            cursor: pointer;
+            transform: scale(1.5);
+        }
+
+        .fa-thumbs-up {
+            color: green;
+        }
+
+        .fa-thumbs-down {
             color: #d32f2f;
+        }
+
+        .myreport {
+            color:#d84315;
         }
     </style>
     {% block followcss %}

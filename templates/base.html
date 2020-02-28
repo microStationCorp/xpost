@@ -13,6 +13,8 @@
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>{% block title %}{% endblock title%}</title>
+    {% block profilecss %}
+    {% endblock profilecss %}
     <style>
         .myContent {
             padding-top: 70px;
@@ -46,7 +48,7 @@
         }
 
         .myreport {
-            color:#d84315;
+            color: #d84315;
         }
     </style>
     {% block followcss %}
@@ -97,7 +99,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a href="../newpost" class="nav-link">
+                        <a href="../newpost" class="btn btn-outline-secondary nav-link btn-sm">
                             New Post
                         </a>
                     </li>
@@ -108,7 +110,6 @@
 
     {% block content %}
     {% endblock content %}
-
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
@@ -117,6 +118,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
+
+
     <!-- logout -->
     <script src="{% static 'js/logout.js' %}"></script>
     <!-- follow count -->
@@ -137,6 +140,8 @@
     {% endblock delAjax %}
     {% block fujquery %}
     {% endblock fujquery %}
+    {% block profilejs %}
+    {% endblock profilejs %}
 </body>
 
 </html>

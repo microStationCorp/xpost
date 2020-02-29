@@ -1,81 +1,82 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block title %}Profile{% endblock title %}
-
 {% block profilecss %}
 
 <style>
-    #ldrhead .myhead {
-        transition-duration: .3s;
-    }
+  #ldrhead .myhead {
+    transition-duration: 0.3s;
+  }
 
-    #ldrhead .myhead:hover {
-        border-radius: 10px;
-        transition-duration: .3s;
-        transform: scale(1.5);
-        font-weight: bold;
-        cursor: pointer;
-    }
+  #ldrhead .myhead:hover {
+    border-radius: 10px;
+    transition-duration: 0.3s;
+    transform: scale(1.5);
+    font-weight: bold;
+    cursor: pointer;
+  }
 
-    .setHeadActive {
-        color: rgb(11, 114, 133);
-        font-weight: bolder;
-    }
+  .setHeadActive {
+    color: rgb(11, 114, 133);
+    font-weight: bolder;
+  }
 </style>
 
 {% endblock profilecss %}
-
 {% block content %}
 
 <div class="myContent container">
-    <div class="card p-2" style="box-shadow: 1px 1px 1px rgba(13, 54, 54, 0.507);">
-        <h1 class="text-center">{{username}}</h1>
-        <small class="text-muted text-center">{{email}}</small>
+  <div class="card p-2" style="box-shadow: 1px 1px 1px rgba(13, 54, 54, 0.507);">
+    <h1 class="text-center">{{username}}</h1>
+    <small class="text-muted text-center">{{email}}</small>
+    <div class="row justify-content-center">
+      <div class="col-2 text-center" style="min-width: 150px;"> Follower : {{follower}}</div>
+      <div class="col-2 text-center" style="min-width: 150px;"> Following : {{following}}</div>
     </div>
-    <div class="card mt-5" style="box-shadow: 1px 1px 1px rgba(13, 54, 54, 0.507);">
-        <div id='ldrhead' class="row text-center justify-content-around">
-            <div data-dashid="likes" class="setHeadActive myhead col-sm-2 p-2">
-                LIKES
-            </div>
-            <div data-dashid="dislikes" class="myhead col-sm-2 p-2">
-                DIS-LIKES
-            </div>
-            <div data-dashid="report" class="myhead col-sm-2 p-2">
-                REPORT
-            </div>
-        </div>
+  </div>
+  <div class="card mt-5" style="box-shadow: 1px 1px 1px rgba(13, 54, 54, 0.507);">
+    <div id="ldrhead" class="row text-center justify-content-around">
+      <div data-dashid="likes" class="setHeadActive myhead col-sm-2 p-2">
+        LIKES
+      </div>
+      <div data-dashid="dislikes" class="myhead col-sm-2 p-2">
+        DIS-LIKES
+      </div>
+      <div data-dashid="report" class="myhead col-sm-2 p-2">
+        REPORT
+      </div>
     </div>
-    <div class="card mt-2" style="box-shadow: 1px 1px 1px rgba(13, 54, 54, 0.507);">
-        <div id="dashboard" class="p-2">
-            <table class="table table-light table-hover">
-                <caption><small>post like status</small></caption>
-                <thead style="background-color: rgba(84, 94, 94, 0.623);">
-                    <tr>
-                        <th scope="col">sl. no.</th>
-                        <th scope="col">title</th>
-                        <th scope="col">date-of-post</th>
-                        <th scope="col">likes</th>
-                    </tr>
-                </thead>
-                <tbody id="mytablebody">
-                    {% for post in posts|dictsortreversed:"like_count" %}
-                    <tr>
-                        <th scope="row">{{forloop.counter}}</th>
-                        <td>{{post.post.title}}</td>
-                        <td>{{post.post.dateOfPost|date:"F d, Y - h:i:s A"}}</td>
-                        <td>{{post.like_count}}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-
-        </div>
+  </div>
+  <div class="card mt-2" style="box-shadow: 1px 1px 1px rgba(13, 54, 54, 0.507);">
+    <div id="dashboard" class="p-2">
+      <table class="table table-light table-hover">
+        <caption>
+          <small>post like status</small>
+        </caption>
+        <thead style="background-color: rgba(84, 94, 94, 0.623);">
+          <tr>
+            <th scope="col">sl. no.</th>
+            <th scope="col">title</th>
+            <th scope="col">date-of-post</th>
+            <th scope="col">likes</th>
+          </tr>
+        </thead>
+        <tbody id="mytablebody">
+          {% for post in posts %}
+          <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{post.post.title}}</td>
+            <td>{{post.post.dateOfPost|date:"F d, Y - h:i:s A"}}</td>
+            <td>{{post.count}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
+  </div>
 </div>
 
 {% endblock content %}
-
 {% block profilejs %}
 <script src="{% static 'js/userprofile.js' %}"></script>
 {% endblock profilejs %}

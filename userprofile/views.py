@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from userposts.models import Posts
+from timeline.models import Follower
 from django.http import JsonResponse, HttpResponse
 
 # Create your views here.
@@ -16,12 +17,18 @@ def userProfile(response):
         posts.append({
             'sl': sl,
             'post': p,
-            'like_count': p.like.count()
+            'count': p.like.count()
         })
+    posts.sort(key=compare, reverse=True)
+
+    myFollowing = Follower.objects.filter(follower_id=response.user.id).count()
+    myFollower = Follower.objects.filter(following_id=response.user.id).count()
     context = {
-        'posts': posts,
+        'posts': posts[:5],
         'username': response.user,
         'email': response.user.email,
+        'following': myFollowing,
+        'follower': myFollower
     }
     return render(response, 'userprofile/profile.html', context)
 
@@ -33,7 +40,7 @@ def compare(obj):
 @login_required(login_url='../login')
 def poststatus(response):
     if response.method == "GET" and response.is_ajax():
-        allposts = Posts.objects.filter(author__id=response.user.id)[:5]
+        allposts = Posts.objects.filter(author__id=response.user.id)
         posts = []
         sl = 0
         count = 0
@@ -68,10 +75,10 @@ def poststatus(response):
                     'type': response.GET['dashId']
                 })
 
-        posts.sort(key=compare,reverse=True)
+        posts.sort(key=compare, reverse=True)
 
         data = {
-            'posts': posts
+            'posts': posts[:5]
         }
         return JsonResponse(data)
 
